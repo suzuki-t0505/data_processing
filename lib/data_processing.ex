@@ -7,9 +7,16 @@ defmodule DataProcessing do
 
     data
     |> Enum.reject(fn d -> d == "" end)
-    |> Enum.map(fn d -> String.split(d, ",") end)
-    |> Enum.map(fn d -> Enum.zip(column, d) end)
-    |> Enum.map(fn d -> Enum.into(d, %{}) end)
+    |> Enum.map(fn d ->
+      Enum.zip(column, String.split(d, ","))
+      |> Enum.into(%{})
+    end)
+
+    # data
+    # |> Enum.reject(fn d -> d == "" end)
+    # |> Enum.map(fn d -> String.split(d, ",") end)
+    # |> Enum.map(fn d -> Enum.zip(column, d) end)
+    # |> Enum.map(fn d -> Enum.into(d, %{}) end)
   end
 
   def filter_today_value(map_data) do
